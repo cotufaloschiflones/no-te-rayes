@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#120d26">
+  <title>No Te Rayes · World Tour</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main class="app">
+    <div class="stage" id="stage">
+      <video id="cam" class="cam" autoplay playsinline muted></video>
+      <div class="shade" aria-hidden="true"></div>
+
+      <!-- Portada -->
+      <section id="screen-start" class="screen screen-start">
+        <div class="globe" aria-hidden="true">🌍</div>
+        <h1 class="title">No Te Rayes<span>World Tour</span></h1>
+        <p class="lead">
+          Te sale <strong>«No te preocupes, mundo»</strong> en otro idioma.
+          Dilo en voz alta y bien pronunciado para viajar al siguiente país.
+        </p>
+
+        <div class="options">
+          <fieldset class="segmented" id="opt-difficulty">
+            <legend>Exigencia</legend>
+            <label><input type="radio" name="difficulty" value="easy"><span>Relajado</span></label>
+            <label><input type="radio" name="difficulty" value="normal" checked><span>Normal</span></label>
+            <label><input type="radio" name="difficulty" value="hard"><span>Nativo</span></label>
+          </fieldset>
+          <fieldset class="segmented" id="opt-length">
+            <legend>Países</legend>
+            <label><input type="radio" name="length" value="5"><span>5</span></label>
+            <label><input type="radio" name="length" value="10" checked><span>10</span></label>
+            <label><input type="radio" name="length" value="0"><span id="length-all">Todos</span></label>
+          </fieldset>
+        </div>
+
+        <button id="btn-start" class="btn btn-primary" type="button">¡Empezar!</button>
+        <p class="fine">Usa cámara y micrófono. Funciona mejor en Chrome o Edge.</p>
+        <p id="support-warning" class="warning" hidden></p>
+      </section>
+
+      <!-- Cuenta atrás -->
+      <section id="screen-countdown" class="screen screen-countdown" hidden>
+        <div id="countdown" class="countdown">3</div>
+        <p class="countdown-tip">¡Prepárate para hablar!</p>
+      </section>
+
+      <!-- Juego -->
+      <section id="screen-play" class="screen screen-play" hidden>
+        <header class="hud">
+          <span class="pill" id="progress">1 / 10</span>
+          <ol class="dots" id="dots" aria-hidden="true"></ol>
+          <span class="pill" id="timer">0:00</span>
+        </header>
+
+        <article class="card" id="card">
+          <div class="flag" id="flag">🇫🇮</div>
+          <p class="lang-name" id="lang-name">Finés</p>
+          <h2 class="phrase" id="phrase" lang="fi">Älä huoli, maailma</h2>
+          <p class="hint" id="hint" hidden></p>
+        </article>
+
+        <div class="feedback">
+          <div class="meter" aria-hidden="true">
+            <div class="meter-fill" id="meter-fill"></div>
+            <div class="meter-goal" id="meter-goal"></div>
+          </div>
+          <div class="score-row">
+            <span class="score" id="score">—</span>
+            <span class="status" id="status"><i class="mic-dot"></i><span id="status-text">Preparando micro…</span></span>
+          </div>
+          <p class="heard" id="heard" aria-live="polite">Di la frase en voz alta…</p>
+          <p class="error" id="error" role="alert" hidden></p>
+          <form class="typed" id="typed-form" hidden>
+            <input id="typed-input" type="text" autocomplete="off" placeholder="Escribe lo que dirías…" aria-label="Frase">
+            <button class="btn btn-small" type="submit">Probar</button>
+          </form>
+        </div>
+
+        <nav class="controls">
+          <button class="btn btn-ghost" id="btn-listen" type="button">🔊 Escuchar</button>
+          <button class="btn btn-ghost" id="btn-hint" type="button">💡 Pista</button>
+          <button class="btn btn-ghost" id="btn-skip" type="button">⏭ Saltar</button>
+          <button class="btn btn-ghost" id="btn-retry" type="button" hidden>🔁 Reintentar</button>
+        </nav>
+
+        <div class="burst" id="burst" aria-live="assertive"></div>
+      </section>
+
+      <!-- Resultados -->
+      <section id="screen-end" class="screen screen-end" hidden>
+        <p class="end-kicker">Fin del viaje</p>
+        <h2 class="rank" id="rank">Ciudadano del mundo</h2>
+        <div class="end-stats">
+          <div><strong id="stat-passed">0/0</strong><span>países</span></div>
+          <div><strong id="stat-time">0:00</strong><span>tiempo</span></div>
+          <div><strong id="stat-tries">0</strong><span>intentos</span></div>
+        </div>
+        <ol class="results" id="results"></ol>
+        <div class="end-actions">
+          <button id="btn-again" class="btn btn-primary" type="button">Otra vuelta</button>
+          <button id="btn-home" class="btn btn-ghost" type="button">Cambiar opciones</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
